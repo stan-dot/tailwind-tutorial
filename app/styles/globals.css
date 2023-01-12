@@ -1,8 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* @tailwind typography; */
 
 
 .radial-blue{
   background: radial-gradient(lightyellow, skyblue);
 }
+
+
+@layer utilities{
+  .section-min-height{
+    min-height: calc(100vh - 68px);
+  }
+}
+/* the 68 pixels is from h1 and margins in the header*/
