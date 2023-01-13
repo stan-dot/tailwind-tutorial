@@ -1,8 +1,17 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import "../styles/globals.css"
+"use client"
+import Head from 'next/head';
+import Image from 'next/image';
+import { useState } from 'react';
+import "../styles/globals.css";
 
 export default function Home() {
+  const [buttonOpen, setButtonOpen] = useState(false);
+  // todo add toggle-btn class to get the animation
+
+  const toggleButton = () => {
+    setButtonOpen(!buttonOpen);
+  }
+
   return (
     <>
       <Head>
@@ -19,13 +28,27 @@ export default function Home() {
                 🚀 Acme Rockets
               </a>
             </h1>
-            <button id="mobile-open-btton" className="text-3xl sm:hidden focus:outline-none">
-              &#9776;
+            <button onClick={() => toggleButton()} id="hamburger-button" className={`text-3xl md:hidden ${buttonOpen ?? "toggle-btn"} cursor-pointer relative w-8 h-8`}>
+              {/* &#9776; */}
+              <div className="bg-white w-8 h-1 rounded absolute top-4 -mt-0.5 transition-all duration-500 before:content-[''] before:bg-white before:w-8 before:h-1 before:rounded before:absolute before:duration-500 before:-translate-y-3 before:-translate-x-4 before:transition-all after:content-[''] after:bg-white after:w-8 after:h-1 after:rounded after:absolute after:translate-y-3 after:-translate-x-4 after:transition-all after:duration-500">
+              </div>
             </button>
-            <nav className="hidden sm:block space-x-8 text-xl" aria-label='main'>
+            <nav className="hidden md:block space-x-8 text-xl" aria-label='main'>
               <a href="#rockets" className="hover:opacity-90">Our rockets</a>
               <a href="#testimonials" className="hover:opacity-90">Testimonials</a>
               <a href="#contact" className="hover:opacity-90">Contact</a>
+            </nav>
+          </section>
+          <section id="mobile-menu" onClick={() => toggleButton()} className={`absolute top-68 bg-black w-full text-5xl flex-col justify-content-center origin-top animate-open-menu ${buttonOpen ? "flex" : "hidden"}`}>
+            {/* <button onClick={() => toggleButton()} className="text-8xl self-end px-6">
+              &times;
+            </button> */}
+            <nav className="flex flex-col min-h-screen items-center py-8" aria-label='mobile'>
+              <a href="#hero" className='w-full text-center py-6 hover:opacity-90'>Home</a>
+              <a href="#rockets" className='w-full text-center py-6 hover:opacity-90'>Our Rockets</a>
+              <a href="#testimonials" className='w-full text-center py-6 hover:opacity-90'>Testimonials</a>
+              <a href="#contact" className='w-full text-center py-6 hover:opacity-90'>Contact Us</a>
+              <a href="#footer" className='w-full text-center py-6 hover:opacity-90'>Legal</a>
             </nav>
           </section>
         </header>
